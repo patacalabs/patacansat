@@ -1,7 +1,8 @@
+//Incluímos as librerías e iniciamos os obxectos
 #include <Wire.h>
 #include <SFE_BMP180.h>
-
 SFE_BMP180 bmp180;
+
 double Po=1013.25;
 void setup() {
   // Iniciamos a comunicación por Serie
@@ -14,7 +15,7 @@ void setup() {
     Serial.println("Error al iniciar el BMP180");
     while(1); // bucle infinito
   }
-  //miramos canto tempo tarda o sensor e facer as medidas
+  //miramos e imprimimos o tempo que tarda o sensor e facer as medidas
   double status;
   status = bmp180.startTemperature();//Inicio de lectura de temperatura: tempo de medida en milisegundos
   Serial.println(status);
@@ -26,6 +27,7 @@ void loop() {
   //declaramos variables para facer as medidas
   char status; 
   double T,P,A;
+  
   //Inicio de lectura de temperatura
   status = bmp180.startTemperature();
   if(status !=0)
