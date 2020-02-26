@@ -3,11 +3,10 @@
 
 SFE_BMP180 bmp180;
 double Po=1013.25;
-int i=1; //definin este enteiro para que o bucle só se executase un número limitado de veces, pero chegaramos á conclusión de que era tontería, que se segue executnado igual.
 void setup() {
-  // put your setup code here, to run once:
+  // Iniciamos a comunicación por Serie
   Serial.begin(9600);
- 
+ //Iniciamos o sensor
   if (bmp180.begin())
     Serial.println("BMP180 iniciado correctamenten");
   else
@@ -15,9 +14,8 @@ void setup() {
     Serial.println("Error al iniciar el BMP180");
     while(1); // bucle infinito
   }
+  //miramos canto tempo tarda o sensor e facer as medidas
   double status;
-  double T,P;
-
   status = bmp180.startTemperature();//Inicio de lectura de temperatura: tempo de medida en milisegundos
   Serial.println(status);
   status= bmp180.startPressure(3); //Inicio de lectura de temperatura: devolve o tempo, en milisegundos, que tarda en medir tres veces a presión.
@@ -25,14 +23,16 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  char status; //a variable estatus é dinámica, estase redefinindo continuamente
+  //declaramos variables para facer as medidas
+  char status; 
   double T,P,A;
-  status = bmp180.startTemperature();//Inicio de lectura de temperatura
+  //Inicio de lectura de temperatura
+  status = bmp180.startTemperature();
   if(status !=0)
     {
       delay(status); 
       status= bmp180.getTemperature(T);
+      //Inicio de lectura de Presión
       if (status !=0);
       {
         status=bmp180.startPressure(3);
@@ -40,6 +40,7 @@ void loop() {
         {
           delay(status);
           status=bmp180.getPressure(P,T);
+          //sacamos todos os datos polo porto serie
           if (status !=0)
           {
             Serial.print("Temperatura: ");
@@ -57,12 +58,8 @@ void loop() {
         }
       }
     }
+    //Esperamos un segundo entre medidas
     delay(1000);
-    i=i+1;
-    if (i>100)//cando para que só faga 100 medidas e pare e non gaste batería, pero para a nosa aplicación teriamos que quitalo
-    {
-      while(1);
-    }
-    
+       
   
 }
