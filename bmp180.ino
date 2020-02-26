@@ -1,3 +1,4 @@
+/* libraría https://github.com/LowPowerLab/SFE_BMP180 */
 //Incluímos as librerías e iniciamos os obxectos
 #include <Wire.h>
 #include <SFE_BMP180.h>
