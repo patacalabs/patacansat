@@ -18,9 +18,11 @@ void setup() {
   }
   //miramos e imprimimos o tempo que tarda o sensor e facer as medidas
   double status;
-  status = bmp180.startTemperature();//Inicio de lectura de temperatura: tempo de medida en milisegundos
+  //Inicio de lectura de temperatura: tempo de medida en milisegundos
+  status = bmp180.startTemperature();
   Serial.println(status);
-  status= bmp180.startPressure(3); //Inicio de lectura de temperatura: devolve o tempo, en milisegundos, que tarda en medir tres veces a presión.
+  //Inicio de lectura: devolve o tempo que tarda en medir tres veces a presión.
+  status= bmp180.startPressure(3); 
   Serial.println(status);
 }
 
